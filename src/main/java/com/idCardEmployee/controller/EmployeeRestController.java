@@ -3,9 +3,7 @@ package com.idCardEmployee.controller;
 import com.idCardEmployee.entity.Employee;
 import com.idCardEmployee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,10 +12,33 @@ import java.util.List;
 public class EmployeeRestController {
     @Autowired
     private EmployeeService employeeService;
-    @GetMapping("employees")
+    @GetMapping("/employees")
     public List<Employee> showAllEmployees(){
-        List<Employee> allEmployees = employeeService.getAllEmployee();
-        return allEmployees;
+        return employeeService.getAllEmployee();
+    }
+    @GetMapping("/employees/{id}")
+    public Employee showEmployeeById(@PathVariable int id){
+        return employeeService.getEmployee(id);
+
+    }
+    @PostMapping("/employees")
+    public Employee addNewEmployee(@RequestBody Employee employee){
+        employeeService.saveEmployee(employee);
+        return employee;
+    }
+    @PutMapping("/employees")
+    public Employee updateEmployee(@RequestBody Employee employee){
+        employeeService.saveEmployee(employee);
+        return employee;
+    }
+    @DeleteMapping("/employees/{id}")
+    public String deleteEmployee(@PathVariable int id){
+        employeeService.deleteEmployee(id);
+        return "Сотрудник с id: " + id + " удален";
+    }
+    @GetMapping("/employees/surname/{surname}")
+    public List<Employee> showAllEmployeesBySurname(@PathVariable String surname){
+        return employeeService.findAllBySurname(surname);
     }
 
 }
