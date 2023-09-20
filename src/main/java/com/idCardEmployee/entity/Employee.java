@@ -3,11 +3,11 @@ package com.idCardEmployee.entity;
 import javax.persistence.*;
 import java.time.LocalDate;
 @Entity
-@Table(name = "employee")
+@Table(name = "employees")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "employees_id")
     private int id;
     @Column(name = "surname")
     private String surname;
@@ -16,7 +16,7 @@ public class Employee {
     @Column(name = "date_of_employment")
     private LocalDate dateOfEmployment;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_card_access")
+    @JoinColumn(name = "card_access_id")
     private CardAccess cardAccess;
     
     public Employee() {

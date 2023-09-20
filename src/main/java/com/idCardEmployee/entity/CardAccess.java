@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class CardAccess {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "card_access_id")
     private int id;
     @Enumerated(EnumType.STRING)
     @Column(name = "level_access")
