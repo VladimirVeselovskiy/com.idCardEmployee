@@ -19,16 +19,15 @@ public class EmployeeRestController {
     @GetMapping("/employees/{id}")
     public Employee showEmployeeById(@PathVariable int id){
         return employeeService.getEmployee(id);
-
     }
     @PostMapping("/employees")
     public Employee addNewEmployee(@RequestBody Employee employee){
         employeeService.saveEmployee(employee);
         return employee;
     }
-    @PutMapping("/employees")
+    @PutMapping("/employees/{id}")
     public Employee updateEmployee(@RequestBody Employee employee){
-        employeeService.saveEmployee(employee);
+        employeeService.updateEmployee(employee);
         return employee;
     }
     @DeleteMapping("/employees/{id}")
@@ -40,5 +39,4 @@ public class EmployeeRestController {
     public List<Employee> showAllEmployeesBySurname(@PathVariable String surname){
         return employeeService.findAllBySurname(surname);
     }
-
 }
