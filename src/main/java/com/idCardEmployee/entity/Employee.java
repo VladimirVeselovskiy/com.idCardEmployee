@@ -22,10 +22,12 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String surname, String department, LocalDate dateOfEmployment) {
+    public Employee(int id, String surname, String department, LocalDate dateOfEmployment, CardAccess cardAccess) {
+        this.id = id;
         this.surname = surname;
         this.department = department;
         this.dateOfEmployment = dateOfEmployment;
+        this.cardAccess = cardAccess;
     }
 
     public int getId() {

@@ -15,8 +15,8 @@ public class CardAccess {
 
     public CardAccess() {
     }
-
-    public CardAccess(LevelAccess levelAccess) {
+    public CardAccess(int id, LevelAccess levelAccess) {
+        this.id = id;
         this.levelAccess = levelAccess;
     }
 
@@ -43,4 +43,5 @@ public class CardAccess {
                 ", levelAccess=" + levelAccess +
                 '}';
     }
+
 }
