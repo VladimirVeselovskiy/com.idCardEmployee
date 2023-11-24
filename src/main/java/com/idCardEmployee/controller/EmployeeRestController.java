@@ -3,6 +3,7 @@ package com.idCardEmployee.controller;
 import com.idCardEmployee.entity.Employee;
 import com.idCardEmployee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class EmployeeRestController {
         return employeeService.getEmployee(id);
     }
     @PostMapping("/employees")
+    @ResponseStatus(HttpStatus.CREATED)
     public Employee addNewEmployee(@RequestBody Employee employee){
         employeeService.saveEmployee(employee);
         return employee;
