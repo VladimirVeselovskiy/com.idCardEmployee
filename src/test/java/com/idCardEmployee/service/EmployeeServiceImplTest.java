@@ -1,6 +1,7 @@
 package com.idCardEmployee.service;
 
 import com.idCardEmployee.entity.CardAccess;
+import com.idCardEmployee.entity.Department;
 import com.idCardEmployee.entity.Employee;
 import com.idCardEmployee.entity.LevelAccess;
 import com.idCardEmployee.exception.EmployeeNotFoundException;
@@ -29,9 +30,9 @@ public class EmployeeServiceImplTest {
     @Test
     void shouldGetAllEmployee(){
         //given
-        Employee employee1 = new Employee(1,"Simons","IT",
+        Employee employee1 = new Employee(1,"Simons", Department.IT,
                 LocalDate.of(1991,2,5), new CardAccess(1, LevelAccess.THREE));
-        Employee employee2 = new Employee(2,"White","HR",
+        Employee employee2 = new Employee(2,"White", Department.Management,
                 LocalDate.of(2001,3,8), new CardAccess(2,LevelAccess.TWO));
 
         given(employeeRepository.findAll()).willReturn(List.of(employee1, employee2));
@@ -47,7 +48,7 @@ public class EmployeeServiceImplTest {
     @Test
     void shouldSaveEmployee(){
         //given
-        Employee employee = new Employee(1,"Simons","IT",
+        Employee employee = new Employee(1,"Simons", Department.IT,
                 LocalDate.of(1991,2,5), new CardAccess(1, LevelAccess.THREE));
 
         given(employeeRepository.save(employee)).willReturn(employee);
@@ -61,7 +62,7 @@ public class EmployeeServiceImplTest {
     @Test
     void shouldGetEmployeeById(){
         //given
-        Employee employee = new Employee(1,"Simons","IT",
+        Employee employee = new Employee(1,"Simons", Department.IT,
                 LocalDate.of(1991,2,5), new CardAccess(1, LevelAccess.THREE));
 
         given(employeeRepository.findById(1)).willReturn(Optional.of(employee));
@@ -89,12 +90,12 @@ public class EmployeeServiceImplTest {
     @Test
     void shouldUpdateEmployee(){
         //given
-        Employee employee = new Employee(1,"Simons","IT",
+        Employee employee = new Employee(1,"Simons", Department.IT,
                 LocalDate.of(1991,2,5), new CardAccess(1, LevelAccess.THREE));
 
         given(employeeRepository.findById(employee.getId())).willReturn(Optional.of(employee));
         employee.setSurname("Bishop");
-        employee.setDepartment("Logistics");
+        employee.setDepartment(Department.Logistics);
         employee.setDateOfEmployment(LocalDate.of(1991, 3,21));
 
         //when
@@ -152,9 +153,9 @@ public class EmployeeServiceImplTest {
     void shouldGetEmployeeFindBySurname(){
         //given
         List<Employee> employeeList = new ArrayList<>();
-        Employee employee1 = new Employee(1,"Simons","IT",
+        Employee employee1 = new Employee(1,"Simons", Department.IT,
                 LocalDate.of(1991,2,5), new CardAccess(1, LevelAccess.THREE));
-        Employee employee2 = new Employee(2,"White","HR",
+        Employee employee2 = new Employee(2,"White", Department.HR,
                 LocalDate.of(2001,3,8), new CardAccess(2,LevelAccess.TWO));
         employeeList.add(employee1);
         employeeList.add(employee2);

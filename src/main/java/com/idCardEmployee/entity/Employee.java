@@ -18,8 +18,9 @@ public class Employee {
     private int id;
     @Column(name = "surname")
     private String surname;
+    @Enumerated(EnumType.STRING)
     @Column(name = "department")
-    private String department;
+    private Department department;
     @Column(name = "date_of_employment")
     private LocalDate dateOfEmployment;
     @OneToOne(cascade = CascadeType.ALL)
@@ -29,7 +30,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(int id, String surname, String department, LocalDate dateOfEmployment, CardAccess cardAccess) {
+    public Employee(int id, String surname, Department department, LocalDate dateOfEmployment, CardAccess cardAccess) {
         this.id = id;
         this.surname = surname;
         this.department = department;
@@ -53,11 +54,11 @@ public class Employee {
         this.surname = surname;
     }
 
-    public String getDepartment() {
+    public Department getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
 

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.idCardEmployee.Application;
 import com.idCardEmployee.entity.CardAccess;
+import com.idCardEmployee.entity.Department;
 import com.idCardEmployee.entity.Employee;
 import com.idCardEmployee.entity.LevelAccess;
 import com.idCardEmployee.service.EmployeeService;
@@ -37,9 +38,9 @@ public class EmployeeRestControllerTest {
     @Test
     public void shouldGetAllEmployeeTest() throws Exception{
         //given
-        Employee employee1 = new Employee(1,"Simons","IT",
+        Employee employee1 = new Employee(1,"Simons", Department.IT,
                 LocalDate.of(1991,2,5), new CardAccess(1, LevelAccess.THREE));
-        Employee employee2 = new Employee(2,"White","HR",
+        Employee employee2 = new Employee(2,"White", Department.HR,
                 LocalDate.of(2001,3,8), new CardAccess(2,LevelAccess.TWO));
 
         List<Employee> employeeList = new ArrayList<>(Arrays.asList(employee1, employee2));
@@ -59,7 +60,7 @@ public class EmployeeRestControllerTest {
     @Test
     public void shouldGetEmployeeByIdTest() throws Exception{
         //given
-        Employee employee = new Employee(1,"Simons","IT",
+        Employee employee = new Employee(1,"Simons", Department.IT,
                 LocalDate.of(1991,2,5), new CardAccess(1, LevelAccess.THREE));
 
         //when
@@ -76,7 +77,7 @@ public class EmployeeRestControllerTest {
     @Test
     public void shouldAddNewEmployee() throws Exception {
         //given
-        Employee employee = new Employee(1,"Simons","IT",
+        Employee employee = new Employee(1,"Simons", Department.IT,
                 LocalDate.of(1991,2,5), new CardAccess(1, LevelAccess.THREE));
 
         // с этим дата становится преемлемой для json, без этого не работает
@@ -96,7 +97,7 @@ public class EmployeeRestControllerTest {
     @Test
     public void shouldUpdateEmployee() throws Exception {
         //given
-        Employee employee = new Employee(1,"Simons","IT",
+        Employee employee = new Employee(1,"Simons", Department.IT,
                 LocalDate.of(1991,2,5), new CardAccess(1, LevelAccess.THREE));
 
         // с этим дата становится преемлемой для json, без этого не работает
@@ -108,7 +109,7 @@ public class EmployeeRestControllerTest {
         when(employeeService.getEmployee(employee.getId())).thenReturn(employee);
 
         employee.setSurname("Bishop");
-        employee.setDepartment("Logistics");
+        employee.setDepartment(Department.Logistics);
         employee.setDateOfEmployment(LocalDate.of(1991, 3,21));
 
         when(employeeService.updateEmployee(employee)).thenReturn(employee);
@@ -124,7 +125,7 @@ public class EmployeeRestControllerTest {
     @Test
     public void shouldDeleteEmployeeTest() throws Exception{
         //given
-        Employee employee = new Employee(1,"Simons","IT",
+        Employee employee = new Employee(1,"Simons", Department.IT,
                 LocalDate.of(1991,2,5), new CardAccess(1, LevelAccess.THREE));
 
         //when
@@ -142,7 +143,7 @@ public class EmployeeRestControllerTest {
     @Test
     public void shouldGetEmployeeFindBySurname() throws Exception{
         //given
-        Employee employee1 = new Employee(1,"Simons","IT",
+        Employee employee1 = new Employee(1,"Simons", Department.IT,
                 LocalDate.of(1991,2,5), new CardAccess(1, LevelAccess.THREE));
 
         List<Employee> employeeList = new ArrayList<>(List.of(employee1));
