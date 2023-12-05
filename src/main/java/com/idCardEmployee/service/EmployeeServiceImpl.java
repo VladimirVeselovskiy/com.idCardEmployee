@@ -1,4 +1,5 @@
 package com.idCardEmployee.service;
+import com.idCardEmployee.exception.CardAccessNotFoundException;
 import com.idCardEmployee.exception.EmployeeNotFoundException;
 import com.idCardEmployee.repository.EmployeeRepository;
 import com.idCardEmployee.entity.Employee;
@@ -26,7 +27,11 @@ public class EmployeeServiceImpl implements EmployeeService{
         Optional<Employee> updateEmployee = employeeRepository.findById(employee.getId());
         if(updateEmployee.isEmpty()){
             throw new EmployeeNotFoundException(employee.getId());
-        }else {
+        }
+        if (employee.getCard().getId() != updateEmployee.get().getCard().getId()){
+            throw new CardAccessNotFoundException("The employee ID card was not found, cardId= ", employee.getCard().getId());
+        }
+       else {
             Employee emp = updateEmployee.get();
             emp.setSurname(employee.getSurname());
             emp.setDepartment(employee.getDepartment());

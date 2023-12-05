@@ -4,6 +4,7 @@ import com.idCardEmployee.entity.CardAccess;
 import com.idCardEmployee.entity.Department;
 import com.idCardEmployee.entity.Employee;
 import com.idCardEmployee.entity.LevelAccess;
+import com.idCardEmployee.exception.CardAccessNotFoundException;
 import com.idCardEmployee.exception.EmployeeNotFoundException;
 import com.idCardEmployee.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
@@ -118,6 +119,24 @@ public class EmployeeServiceImplTest {
 
         //then
         verify(employeeRepository, times(1)).findById(employeeId.getId());
+    }
+    @Test
+    void shouldCardAccessNotFoundException_WhenUpdateEmployee(){
+        //given
+        Employee employee = new Employee(1,"Simons", Department.IT,
+                LocalDate.of(1991,2,5), new CardAccess(1, LevelAccess.THREE));
+
+        CardAccess cardAccessID = new CardAccess();
+        Employee updateEmployee = new Employee (1,"Simons", Department.IT,
+                LocalDate.of(1991,2,5), cardAccessID);
+
+        given(employeeRepository.findById(employee.getId())).willReturn(Optional.of(employee));
+
+        //when
+        assertThrows(CardAccessNotFoundException.class, () -> employeeService.updateEmployee(updateEmployee));
+
+        //then
+        verify(employeeRepository, times(1)).findById(employee.getId());
     }
     @Test
     void shouldDeleteEmployeeById(){
