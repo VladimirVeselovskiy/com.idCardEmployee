@@ -2,6 +2,7 @@ package com.idCardEmployee.service;
 
 import com.idCardEmployee.entity.CardAccess;
 import com.idCardEmployee.entity.LevelAccess;
+import com.idCardEmployee.exception.CardAccessException;
 import com.idCardEmployee.exception.CardAccessNotFoundException;
 import com.idCardEmployee.repository.CardAccessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,18 +26,24 @@ public class CardAccessServiceImpl implements CardAccessService{
     /** метод должен сохраняет только карту с уровнем доступа, без сотрудника */
     @Override
     public void saveCardAccess(CardAccess cardAccess) {
-        //TODO надо добавить выброс исключения если пытаемся сохранить и сотрудника
+        if(cardAccess.getEmployee() != null){
+            throw new CardAccessException("нельзя сохранять карту с сотрудником!");
+        }
         cardAccessRepository.save(cardAccess);
     }
-    /** метод должен обновляет только карту с уровнем доступа, без сотрудника */
+    /**
+     * метод должен обновляет только карту с уровнем доступа, без сотрудника
+     */
     @Override
     public void updateCardAccess(CardAccess cardAccess) {
         Optional<CardAccess> updateCardAccess = cardAccessRepository.findById(cardAccess.getId());
         if (updateCardAccess.isEmpty()){
             throw new CardAccessNotFoundException(cardAccess.getId());
         }
+        if(cardAccess.getEmployee() != updateCardAccess.get().getEmployee()){
+            throw new CardAccessException("нельзя обновлять карту с сотрудником!");
+        }
         else {
-            //TODO надо добавить выброс исключения если пытаемся обновить и сотрудника
             CardAccess card = updateCardAccess.get();
             card.setLevelAccess(cardAccess.getLevelAccess());
             cardAccessRepository.save(card);
