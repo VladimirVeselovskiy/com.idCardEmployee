@@ -39,5 +39,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(CardAccessException.class)
+    public ResponseEntity<Object> handleEntityCardException(RuntimeException ex){
+        LOGGER.error(ex.getMessage());
 
+        List<String> details = new ArrayList<>();
+        details.add(ex.getMessage());
+
+        ApiError apiError = new ApiError(LocalDateTime.now(), HttpStatus.BAD_REQUEST, "Bad Request",
+                details);
+
+        return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
+    }
 }
