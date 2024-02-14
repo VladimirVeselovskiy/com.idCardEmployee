@@ -9,5 +9,6 @@ import java.util.List;
 
 @Repository
 public interface CardAccessRepository extends JpaRepository<CardAccess, Integer> {
+
     List<CardAccess> findAllByLevelAccess(LevelAccess levelAccess);
 }

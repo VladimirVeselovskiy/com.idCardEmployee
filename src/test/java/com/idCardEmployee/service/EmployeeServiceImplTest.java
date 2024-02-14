@@ -24,10 +24,12 @@ import static org.mockito.BDDMockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class EmployeeServiceImplTest {
+
     @Mock
     private EmployeeRepository employeeRepository;
     @InjectMocks
     private EmployeeServiceImpl employeeService;
+
     @Test
     void shouldGetAllEmployee(){
         //given
@@ -44,8 +46,10 @@ public class EmployeeServiceImplTest {
         //then
         assertThat(employeeList).isNotNull();
         assertThat(employeeList.size()).isEqualTo(2);
+
         verify(employeeRepository, times(1)).findAll();
     }
+
     @Test
     void shouldSaveEmployee(){
         //given
@@ -60,6 +64,7 @@ public class EmployeeServiceImplTest {
         //then
         verify(employeeRepository, times(1)).save(employee);
     }
+
     @Test
     void shouldGetEmployeeById(){
         //given
@@ -73,8 +78,10 @@ public class EmployeeServiceImplTest {
 
         //then
         assertThat(employeeById).isNotNull();
+
         verify(employeeRepository, times(1)).findById(employeeById);
     }
+
     @Test
     void  shouldEmployeeNotFoundException_WhenGetEmployeeById() throws EmployeeNotFoundException{
         //given
@@ -88,6 +95,7 @@ public class EmployeeServiceImplTest {
         //then
         verify(employeeRepository, times(1)).findById(employeeId);
     }
+
     @Test
     void shouldUpdateEmployee(){
         //given
@@ -95,6 +103,7 @@ public class EmployeeServiceImplTest {
                 LocalDate.of(1991,2,5), new CardAccess(1, LevelAccess.THREE));
 
         given(employeeRepository.findById(employee.getId())).willReturn(Optional.of(employee));
+
         employee.setSurname("Bishop");
         employee.setDepartment(Department.Logistics);
         employee.setDateOfEmployment(LocalDate.of(1991, 3,21));
@@ -104,9 +113,11 @@ public class EmployeeServiceImplTest {
 
         //then
         assertNotNull(updateEmployee);
+
         verify(employeeRepository, times(1)).findById(employee.getId());
         verify(employeeRepository, times(1)).save(updateEmployee);
     }
+
     @Test
     void shouldEmployeeNotFoundException_WhenUpdateEmployee(){
         //given
@@ -120,6 +131,7 @@ public class EmployeeServiceImplTest {
         //then
         verify(employeeRepository, times(1)).findById(employeeId.getId());
     }
+
     @Test
     void shouldCardAccessNotFoundException_WhenUpdateEmployee(){
         //given
@@ -127,6 +139,7 @@ public class EmployeeServiceImplTest {
                 LocalDate.of(1991,2,5), new CardAccess(1, LevelAccess.THREE));
 
         CardAccess cardAccessID = new CardAccess();
+
         Employee updateEmployee = new Employee (1,"Simons", Department.IT,
                 LocalDate.of(1991,2,5), cardAccessID);
 
@@ -138,6 +151,7 @@ public class EmployeeServiceImplTest {
         //then
         verify(employeeRepository, times(1)).findById(employee.getId());
     }
+
     @Test
     void shouldDeleteEmployeeById(){
         //given
@@ -151,6 +165,7 @@ public class EmployeeServiceImplTest {
         //then
         verify(employeeRepository, times(1)).deleteById(employeeId);
     }
+
     @Test
     void shouldEmployeeNotFoundException_WhenDeleteEmployeeById(){
         //given
@@ -168,14 +183,18 @@ public class EmployeeServiceImplTest {
         //then
         verify(employeeRepository, times(1)).deleteById(employeeId);
     }
+
     @Test
     void shouldGetEmployeeFindBySurname(){
         //given
         List<Employee> employeeList = new ArrayList<>();
+
         Employee employee1 = new Employee(1,"Simons", Department.IT,
                 LocalDate.of(1991,2,5), new CardAccess(1, LevelAccess.THREE));
+
         Employee employee2 = new Employee(2,"White", Department.HR,
                 LocalDate.of(2001,3,8), new CardAccess(2,LevelAccess.TWO));
+
         employeeList.add(employee1);
         employeeList.add(employee2);
 

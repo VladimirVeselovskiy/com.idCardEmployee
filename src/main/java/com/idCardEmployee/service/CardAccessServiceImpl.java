@@ -18,6 +18,7 @@ public class CardAccessServiceImpl implements CardAccessService{
 
     @Autowired
     private CardAccessRepository cardAccessRepository;
+
     @Override
     public List<CardAccess> getAllCardAccess() {
         return cardAccessRepository.findAll();
@@ -31,12 +32,14 @@ public class CardAccessServiceImpl implements CardAccessService{
         }
         cardAccessRepository.save(cardAccess);
     }
+
     /**
      * метод должен обновляет только карту с уровнем доступа, без сотрудника
      */
     @Override
     public void updateCardAccess(CardAccess cardAccess) {
         Optional<CardAccess> updateCardAccess = cardAccessRepository.findById(cardAccess.getId());
+
         if (updateCardAccess.isEmpty()){
             throw new CardAccessNotFoundException(cardAccess.getId());
         }
@@ -49,11 +52,14 @@ public class CardAccessServiceImpl implements CardAccessService{
             cardAccessRepository.save(card);
         }
     }
+
     @Override
     public CardAccess getCardAccess(int id) {
         Optional<CardAccess> getCardAccess = cardAccessRepository.findById(id);
+
         return getCardAccess.orElseThrow(() -> new CardAccessNotFoundException(id));
     }
+
     @Override
     public void deleteCardAccess(int id) {
         try {
@@ -62,6 +68,7 @@ public class CardAccessServiceImpl implements CardAccessService{
             throw new CardAccessNotFoundException(id);
         }
     }
+
     @Override
     public List<CardAccess> getAllByLevelAccess(LevelAccess levelAccess) {
         return cardAccessRepository.findAllByLevelAccess(levelAccess);

@@ -30,11 +30,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = Application.class)
 @AutoConfigureMockMvc
 public class EmployeeRestControllerTest {
+
     @Autowired
     private MockMvc mockMvc;
     @MockBean
     private EmployeeService employeeService;
+
     private static final ObjectMapper objectMapper = new ObjectMapper();
+
     @Test
     public void shouldGetAllEmployeeTest() throws Exception{
         //given
@@ -57,6 +60,7 @@ public class EmployeeRestControllerTest {
 
         verify(employeeService, times(1)).getAllEmployee();
     }
+
     @Test
     public void shouldGetEmployeeByIdTest() throws Exception{
         //given
@@ -74,6 +78,7 @@ public class EmployeeRestControllerTest {
 
         verify(employeeService, times(1)).getEmployee(1);
     }
+
     @Test
     public void shouldAddNewEmployee() throws Exception {
         //given
@@ -94,6 +99,7 @@ public class EmployeeRestControllerTest {
                 .andExpect(status().isCreated())
                 .andDo(print());
     }
+
     @Test
     public void shouldUpdateEmployee() throws Exception {
         //given
@@ -122,6 +128,7 @@ public class EmployeeRestControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print());
     }
+
     @Test
     public void shouldDeleteEmployeeTest() throws Exception{
         //given
@@ -140,6 +147,7 @@ public class EmployeeRestControllerTest {
         verify(employeeService, times(1)).deleteEmployee(employee.getId());
         verifyNoMoreInteractions(employeeService);
     }
+
     @Test
     public void shouldGetEmployeeFindBySurname() throws Exception{
         //given

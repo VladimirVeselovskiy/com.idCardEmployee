@@ -5,22 +5,27 @@ import javax.persistence.*;
 @Entity
 @Table(name = "card_access")
 public class CardAccess {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "card_access_id")
     private int id;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "level_access")
     private LevelAccess levelAccess;
+
     @OneToOne(mappedBy = "cardAccess")
     private Employee employee;
 
     public CardAccess() {
     }
+
     public CardAccess(int id, LevelAccess levelAccess) {
         this.id = id;
         this.levelAccess = levelAccess;
     }
+
     public CardAccess(int id, LevelAccess levelAccess, Employee employee) {
         this.id = id;
         this.levelAccess = levelAccess;

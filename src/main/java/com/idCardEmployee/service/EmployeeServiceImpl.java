@@ -12,19 +12,24 @@ import java.util.Optional;
 @Service
 @Transactional
 public class EmployeeServiceImpl implements EmployeeService{
+
     @Autowired
     private EmployeeRepository employeeRepository;
+
     @Override
     public List<Employee> getAllEmployee() {
         return employeeRepository.findAll();
     }
+
     @Override
     public void saveEmployee(Employee employee) {
         employeeRepository.save(employee);
     }
+
     @Override
     public Employee updateEmployee(Employee employee){
         Optional<Employee> updateEmployee = employeeRepository.findById(employee.getId());
+
         if(updateEmployee.isEmpty()){
             throw new EmployeeNotFoundException(employee.getId());
         }
@@ -41,11 +46,14 @@ public class EmployeeServiceImpl implements EmployeeService{
             return emp;
         }
     }
+
     @Override
     public Employee getEmployee(int id) {
         Optional<Employee> employee = employeeRepository.findById(id);
+
         return employee.orElseThrow(() ->new EmployeeNotFoundException(id));
     }
+
     @Override
     public void deleteEmployee(int id) {
         try {
@@ -54,6 +62,7 @@ public class EmployeeServiceImpl implements EmployeeService{
             throw new EmployeeNotFoundException(id);
         }
     }
+
     @Override
     public List<Employee> findAllBySurname(String surname) {
         return employeeRepository.findAllBySurname(surname);

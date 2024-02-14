@@ -25,10 +25,12 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CardAccessServiceImplTest {
+
     @Mock
     private CardAccessRepository cardAccessRepository;
     @InjectMocks
     private CardAccessServiceImpl cardAccessServiceImpl;
+
     @Test
     void shouldGetAllCardAccess() {
         //given
@@ -45,6 +47,7 @@ class CardAccessServiceImplTest {
         assertThat(cardAccessList.size()).isEqualTo(2);
         verify(cardAccessRepository, times(1)).findAll();
     }
+
     @Test
     void shouldSaveCardAccess() {
         //given
@@ -58,6 +61,7 @@ class CardAccessServiceImplTest {
         //then
         verify(cardAccessRepository, times(1)).save(cardAccess1);
     }
+
     @Test
     void shouldCardAccessException_WhenSaveCardAccess(){
         //given
@@ -72,6 +76,7 @@ class CardAccessServiceImplTest {
         //then
         assertNotNull(cardAccess1.getEmployee());
     }
+
     @Test
     void shouldUpdateCardAccess() {
         //given
@@ -88,6 +93,7 @@ class CardAccessServiceImplTest {
         verify(cardAccessRepository, times(1)).findById(cardAccess1.getId());
         verify(cardAccessRepository, times(1)).save(cardAccess1);
     }
+
     @Test
     void shouldCardAccessNotFoundException_WhenUpdateCardAccess(){
         //given
@@ -101,6 +107,7 @@ class CardAccessServiceImplTest {
         //then
         verify(cardAccessRepository, times(1)).findById(cardAccess.getId());
     }
+
     @Test
     void shouldGetCardAccess() {
         //given
@@ -115,6 +122,7 @@ class CardAccessServiceImplTest {
         assertThat(cardAccessId).isNotNull();
         verify(cardAccessRepository, times(1)).findById(cardAccessId);
     }
+
     @Test
     void shouldCardAccessException_WhenGetCardAccess(){
         //given
@@ -128,6 +136,7 @@ class CardAccessServiceImplTest {
         //then
         verify(cardAccessRepository, times(1)).findById(cardAccessId);
     }
+
     @Test
     void shouldDeleteCardAccess() {
         //given
@@ -142,6 +151,7 @@ class CardAccessServiceImplTest {
         assertThat(cardAccess1.getId()).isNotNull();
         verify(cardAccessRepository, times(1)).deleteById(cardAccess1.getId());
     }
+
     @Test
     void shouldCardAccessException_WhenDeleteCardAccess(){
         //given
@@ -157,6 +167,7 @@ class CardAccessServiceImplTest {
 
         verify(cardAccessRepository, times(1)).deleteById(cardAccessId);
     }
+
     @Test
     void shouldGetAllByLevelAccess() {
         //given

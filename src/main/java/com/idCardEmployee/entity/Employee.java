@@ -12,17 +12,22 @@ import java.time.LocalDate;
         property = "id"
 )
 public class Employee {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employees_id")
     private int id;
+
     @Column(name = "surname")
     private String surname;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "department")
     private Department department;
+
     @Column(name = "date_of_employment")
     private LocalDate dateOfEmployment;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "card_access_id")
     private CardAccess cardAccess;
