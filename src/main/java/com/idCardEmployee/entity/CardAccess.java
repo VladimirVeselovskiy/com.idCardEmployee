@@ -15,7 +15,8 @@ public class CardAccess {
     @Column(name = "level_access")
     private LevelAccess levelAccess;
 
-    @OneToOne(mappedBy = "cardAccess")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "cardAccess")
+    @JoinColumn(name = "card_access_id")
     private Employee employee;
 
     public CardAccess() {
