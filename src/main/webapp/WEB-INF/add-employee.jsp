@@ -12,11 +12,28 @@
 
     Surname <form:input path="surname"/>
     <br><br>
-    department <form:input path="department"/>
+    Department <form:select path="department">
+    <form:option value="IT"/>
+    <form:option value="HR"/>
+    <form:option value="Financial"/>
+    <form:option value="Marketing"/>
+    <form:option value="Logistics"/>
+    <form:option value="Management"/>
+    <form:option value="Security"/>
+    </form:select>
     <br><br>
     DateOfEmployment <form:input path="dateOfEmployment"/>
     <br><br>
-    Card <form:input path="card"/>
+    CardAccessID: <form:hidden path="card.id"/>
+    <td>${employee.card.id}
+        <form:hidden path="id"/>
+    </td>
+    <br>
+    LevelAccess <form:select path="card.levelAccess">
+    <form:option value="ONE"/>
+    <form:option value="TWO"/>
+    <form:option value="THREE"/>
+    </form:select>
     <br><br>
     <input type="submit" value="OK">
 

@@ -19,18 +19,15 @@ public class EmployeeMvcController {
     private EmployeeService employeeService;
 
     @RequestMapping("/employees")
-    public String ShowAllEmployee(Model model){
-
+    public String showAllEmployee(Model model){
         List<Employee> employeeList = employeeService.getAllEmployee();
         model.addAttribute("allEmployees", employeeList);
 
         return "all-employees";
     }
 
-    //TODO надо исправить. не сохраняет при добавление карты сотруднику
     @RequestMapping("/employees/addNewEmployee")
     public String addNewEmployee(Model model){
-
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
 
@@ -44,14 +41,19 @@ public class EmployeeMvcController {
         return "redirect:/id-card-employee/employees";
     }
 
-    //TODO надо исправить, не работает если есть карта у сотрудника
     @RequestMapping("/employees/updateEmployee")
     public String updateEmployee(@RequestParam("empId") int id, Model model){
-
         Employee employee = employeeService.getEmployee(id);
         model.addAttribute("employee", employee);
 
-        return "add-employee";
+        return "update-employee";
+    }
+
+    @RequestMapping(value = "/employees/update-employee")
+    public String updateEmployee(@ModelAttribute("employee") Employee employee){
+        employeeService.updateEmployee(employee);
+
+        return "redirect:/id-card-employee/employees";
     }
 
     @RequestMapping("/employees/deleteEmployee")
