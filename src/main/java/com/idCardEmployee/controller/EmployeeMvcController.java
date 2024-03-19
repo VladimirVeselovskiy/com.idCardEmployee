@@ -23,7 +23,7 @@ public class EmployeeMvcController {
         List<Employee> employeeList = employeeService.getAllEmployee();
         model.addAttribute("allEmployees", employeeList);
 
-        return "all-employees";
+        return "all_employees";
     }
 
     @RequestMapping("/employees/addNewEmployee")
@@ -31,7 +31,7 @@ public class EmployeeMvcController {
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
 
-        return "add-employee";
+        return "add_employee";
     }
 
     @RequestMapping("/employees/saveEmployee")
@@ -41,15 +41,15 @@ public class EmployeeMvcController {
         return "redirect:/id-card-employee/employees";
     }
 
-    @RequestMapping("/employees/updateEmployee")
-    public String updateEmployee(@RequestParam("empId") int id, Model model){
+    @RequestMapping("/employees/update-employee")
+    public String getAndUpdateEmployee(@RequestParam("empId") int id, Model model){
         Employee employee = employeeService.getEmployee(id);
         model.addAttribute("employee", employee);
 
-        return "update-employee";
+        return "update_employee";
     }
 
-    @RequestMapping(value = "/employees/update-employee")
+    @RequestMapping(value = "/employees/updateEmployee")
     public String updateEmployee(@ModelAttribute("employee") Employee employee){
         employeeService.updateEmployee(employee);
 
@@ -61,5 +61,13 @@ public class EmployeeMvcController {
         employeeService.deleteEmployee(id);
 
         return "redirect:/id-card-employee/employees";
+    }
+
+    @RequestMapping("/employees/surname")
+    public String searchEmployeeBySurname(@RequestParam("surname") String surname, Model model){
+        List<Employee> employeeListBySurname = employeeService.findAllBySurname(surname);
+        model.addAttribute("employee", employeeListBySurname);
+
+        return "employees_by_surname";
     }
 }

@@ -1,6 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<head>
+ <style> <%@include file="../css/styles.css"%></style>
+</head>
+
 <body>
 
 <h2>All employee</h2>
@@ -19,7 +24,7 @@
     <c:forEach var="emp" items="${allEmployees}">
 
         <%--То что выделено красным так и должно быть, по другому не работает--%>
-        <c:url var="updateButton" value="/id-card-employee/employees/updateEmployee">
+        <c:url var="updateButton" value="/id-card-employee/employees/update-employee">
             <c:param name="empId" value="${emp.id}"/>
         </c:url>
 
@@ -44,10 +49,18 @@
     </c:forEach>
 
 </table>
-<br>
 
 <input type="button" value="Add"
     onclick="window.location.href = '/id-card-employee/employees/addNewEmployee'"/>
-</body>
+<br>
 
+<h2>Search Employee</h2>
+<form method="get" action="employees/surname">
+    <label>
+        <input type="text" name="surname"/>
+    </label>
+    <input type="submit" value="search">
+</form>
+
+</body>
 </html>

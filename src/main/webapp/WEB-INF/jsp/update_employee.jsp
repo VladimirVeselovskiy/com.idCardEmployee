@@ -1,12 +1,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<head>
+  <style> <%@include file="../css/styles.css"%></style>
+</head>
 
 <body>
 <h2>Update Employee</h2>
 <br>
 
-<form:form action="update-employee" modelAttribute="employee">
+<form:form action="updateEmployee" modelAttribute="employee">
   <form:hidden path="id"/>
 
   EmployeeID: <td>${employee.id}</td>
@@ -40,6 +43,8 @@
   <input type="submit" value="OK">
 
 </form:form>
-
+<br>
+<input type="button" value="Return"
+       onclick="window.location.href = '/id-card-employee/employees'"/>
 </body>
 </html>

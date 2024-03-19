@@ -1,6 +1,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<head>
+    <style> <%@include file="../css/styles.css"%></style>
+</head>
 
 <body>
 <h2>Add Employee</h2>
@@ -38,6 +41,8 @@
     <input type="submit" value="OK">
 
 </form:form>
-
+<br>
+<input type="button" value="Return"
+       onclick="window.location.href = '/id-card-employee/employees'"/>
 </body>
 </html>
