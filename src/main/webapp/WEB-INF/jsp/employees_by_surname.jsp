@@ -5,9 +5,11 @@
   <style> <%@include file="../css/styles.css"%></style>
 </head>
 
+<body>
+<div style="text-align: center;">
+
 <h2>Employees</h2>
 <br>
-<body>
 
 <table>
   <tr>
@@ -29,5 +31,6 @@
 <input type="button" value="Return"
        onclick="window.location.href = '/id-card-employee/employees'"/>
 
+</div>
 </body>
 </html>

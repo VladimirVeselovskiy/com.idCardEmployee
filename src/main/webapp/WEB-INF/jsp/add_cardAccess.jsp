@@ -6,6 +6,7 @@
 </head>
 
 <body>
+<div style="text-align: center;">
 <h2>Add CardAccess</h2>
 <br>
 
@@ -25,5 +26,6 @@
 <br>
 <input type="button" value="Return"
        onclick="window.location.href = '/id-card-employee/card-access'"/>
+</div>
 </body>
 </html>

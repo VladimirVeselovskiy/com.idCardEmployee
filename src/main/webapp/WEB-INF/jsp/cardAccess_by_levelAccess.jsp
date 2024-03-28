@@ -4,9 +4,13 @@
 <head>
     <style> <%@include file="../css/styles.css"%></style>
 </head>
+
+
+<body>
+<div style="text-align: center;">
+
 <h2>CardAccess</h2>
 <br>
-<body>
 <table>
     <tr>
         <th>LevelAccess</th>
@@ -22,5 +26,7 @@
 <br>
 <input type="button" value="Return"
        onclick="window.location.href = '/id-card-employee/card-access'"/>
+
+</div>
 </body>
 </html>
