@@ -1,4 +1,4 @@
-package com.idCardEmployee.controller;
+package com.idCardEmployee.controller.rest;
 
 import com.idCardEmployee.entity.Employee;
 import com.idCardEmployee.service.EmployeeService;

@@ -9,8 +9,16 @@
 <body>
 <div style="text-align: center;">
 
-    <h2>All CardAccess</h2>
-    <br>
+    <div class="header">
+        <h2>All CardAccess</h2>
+
+        <div class="row">
+            <div class="home_page_id_card_employee">
+                <h1>  <input type="button" value="Id-Card-Employee" style="height: 50px; width:  200px;"
+                             onclick="window.location.href = '/id-card-employee'"/> </h1>
+            </div>
+        </div>
+    </div>
 
     <table>
 
@@ -44,8 +52,9 @@
             </tr>
         </c:forEach>
     </table>
+    <br>
 
-    <input type="button" value="Add"
+    <input type="button" value="Add CardAccess" style="height: 30px; width: 110px;"
            onclick="window.location.href = '/id-card-employee/card-access/addNewCardAccess'"/>
     <br>
 
@@ -58,7 +67,7 @@
     </form>
     <br>
 
-    <h2> Go to <input type="button" value="Employees"
+    <h2> Go to <input type="button" value="Employees" style="height: 30px; width: 100px;"
                       onclick="window.location.href = '/id-card-employee/employees'"/></h2>
 
 </div>
