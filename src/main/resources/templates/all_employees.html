@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link href="../static/css/styles.css" type="text/css" rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+
+<div style="text-align: center;">
+
+  <div class="header">
+    <h2>All Employee</h2>
+
+    <div class="row">
+      <div class="home_page_id_card_employee">
+        <h1>  <input type="button" value="Id-Card-Employee" style="height: 50px; width:  200px;"
+                     onclick="window.location.href = '/id-card-employee'"/> </h1>
+      </div>
+    </div>
+  </div>
+  <table>
+    <tr>
+      <th>Surname</th>
+      <th>Department</th>
+      <th>DateOfEmployment</th>
+      <th>CardAccess</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+
+
+      <tr th:each="employees:${allEmployees}" >
+        <td th:text="${employees.surname}"></td>
+        <td th:text="${employees.department}"></td>
+        <td th:text="${employees.dateOfEmployment}"></td>
+        <td th:text="${employees.card?.levelAccess}"></td>
+
+        <td><a th:href="@{/id-card-employee/employees/update-employee/{id}(id=${employees.id})}">Update</a> </td>
+
+        <td><a th:href="@{/id-card-employee/employees/deleteEmployee/{id}(id=${employees.id})}">Delete</a> </td>
+      </tr>
+
+  </table>
+
+  <br>
+
+  <input type="button" value="Add Employee" style="height: 30px; width: 100px;"
+         onclick="window.location.href = '/id-card-employee/employees/addNewEmployee'"/>
+  <br>
+
+  <h2>Search Employee</h2>
+  <form method="get" action="employees/surname">
+    <label>
+      <input type="text" name="surname"/>
+    </label>
+    <input type="submit" value="search">
+  </form>
+  <br>
+
+  <h2> Go to <input type="button" value="CardAccess" style="height: 30px; width: 100px;"
+                    onclick="window.location.href = '/id-card-employee/card-access'"/> </h2>
+</div>
+
+</body>
+</html>
