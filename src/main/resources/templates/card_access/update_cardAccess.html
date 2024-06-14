@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <link href="../../static/css/styles.css" type="text/css" rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+<div style="text-align: center;">
+    <h2>Update Employee</h2>
+    <br>
+
+    <form th:action="@{/id-card-employee/card-access/updateCardAccess}" th:object="${cardAccess}" method="post">
+
+        <label for="id">cardAccessID:</label>
+        <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">
+        <br><br>
+        <label>LevelAccess</label>
+        <select class="form-control" th:field="*{levelAccess}">
+            <option value="ONE">ONE</option>
+            <option value="TWO">TWO</option>
+            <option value="THREE">THREE</option>
+        </select>
+
+        <br><br>
+        <label>EmployeeID:</label>
+        <td th:text="${cardAccess.employee?.id}"></td>
+        <br><br>
+
+        <input type="submit" value="OK">
+    </form>
+
+    <br>
+    <input type="button" value="Return"
+           onclick="window.location.href = '/id-card-employee/card-access'"/>
+
+</div>
+</body>
+</html>

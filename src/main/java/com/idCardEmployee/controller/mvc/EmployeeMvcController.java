@@ -21,7 +21,7 @@ public class EmployeeMvcController {
         List<Employee> employeeList = employeeService.getAllEmployee();
         model.addAttribute("allEmployees", employeeList);
 
-        return "all_employees";
+        return "employee/all_employees";
     }
 
     @GetMapping("/employees/addNewEmployee")
@@ -29,7 +29,7 @@ public class EmployeeMvcController {
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
 
-        return "add_employee";
+        return "employee/add_employee";
     }
 
     @PostMapping("/employees/saveEmployee")
@@ -44,7 +44,7 @@ public class EmployeeMvcController {
         Employee employee = employeeService.getEmployee(id);
         model.addAttribute("employee", employee);
 
-        return "update_employee";
+        return "employee/update_employee";
     }
 
     @PostMapping(value = "/employees/update-employee")
@@ -66,6 +66,6 @@ public class EmployeeMvcController {
         List<Employee> employeeListBySurname = employeeService.findAllBySurname(surname);
         model.addAttribute("employee", employeeListBySurname);
 
-        return "employees_by_surname";
+        return "employee/employees_by_surname";
     }
 }

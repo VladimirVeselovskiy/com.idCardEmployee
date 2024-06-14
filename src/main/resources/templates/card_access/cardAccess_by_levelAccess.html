@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="../../static/css/styles.css" type="text/css" rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+
+<div style="text-align: center;">
+
+    <h2>CardAccess</h2>
+    <br>
+
+    <table>
+        <tr>
+            <th>LevelAccess</th>
+            <th>EmployeeId</th>
+        </tr>
+
+        <tr th:each="cardAcces:${cardAccess}" >
+            <td th:text="${cardAcces.levelAccess}"></td>
+            <td th:text="${cardAcces.employee?.id}"></td>
+
+        </tr>
+    </table>
+    <br>
+    <input type="button" value="Return"
+           onclick="window.location.href = '/id-card-employee/card-access'"/>
+
+</div>
+</body>
+</html>
