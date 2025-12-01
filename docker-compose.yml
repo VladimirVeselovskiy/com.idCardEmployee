@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  db-postgres-14:
+    restart: always
+    image: postgres:14.3-alpine
+    container_name: app-postgres
+    ports:
+      - "5432:5432"
+    environment:
+       POSTGRES_USER: postgres
+       POSTGRES_PASSWORD: postgres
+       POSTGRES_DB: id_card_employee
+    volumes:
+      - ./src/main/resources/idCardEmployee.sql:/docker-entrypoint-initdb.d/idCardEmployee.sql
+      - db-postgres-14:/var/lib/postgresql/data
+
+
+  pgadmin:
+    container_name: app-pgadmin
+    image: dpage/pgadmin4:7
+    restart: always
+    environment:
+       PGADMIN_DEFAULT_EMAIL: admin@admin.com
+       PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8081:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+  app:
+    restart: always
+    build: .
+    container_name: app-idCardEmployee
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db-postgres-14
+    environment:
+      SPRING_DATASOURCE_URL: 'jdbc:postgresql://db-postgres-14/id_card_employee?useSSL=false'
+
+volumes:
+  db-postgres-14:
+  pgadmin-data:
